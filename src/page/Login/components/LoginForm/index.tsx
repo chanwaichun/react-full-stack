@@ -1,18 +1,22 @@
-import {Button, Checkbox, Form, Input,message } from "antd";
+import {Button, Checkbox, Form, Input, message} from "antd";
 import React, {useState} from "react";
 import {login} from "@/api/user";
 import {useNavigate} from "react-router";
 import './index.scss'
+import {setToken} from '@/reducer/user'
+import {useDispatch} from "react-redux";
+
 
 export default function LoginForm() {
     const navigate = useNavigate()
-    const [form] = useState({user: '', password: '',remember:false})
+    const dispatch = useDispatch()
+    const [form] = useState({user: '', password: '', remember: false})
     const onFinish = async (values: any) => {
         console.log('Success:', values);
         try {
             const res = await login(values);
-            console.log(res)
-            window.localStorage.setItem('token', res.data)
+            dispatch(setToken(res.data))
+            //
             navigate('/main')
         } catch (e) {
             console.log(e)
@@ -25,7 +29,7 @@ export default function LoginForm() {
     return (
         <Form
             labelAlign={'left'}
-            labelCol={{span:4}}
+            labelCol={{span: 4}}
             className={'component_loginForm'}
             name="basic"
             initialValues={form}
@@ -52,7 +56,7 @@ export default function LoginForm() {
             <Form.Item
                 name="remember"
                 valuePropName="checked"
-                style={{textAlign:'left'}}
+                style={{textAlign: 'left'}}
             >
                 <Checkbox>记住密码</Checkbox>
             </Form.Item>

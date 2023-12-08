@@ -11,22 +11,32 @@ import {
 import Login from '@/page/Login'
 import Main from '@/page/Main'
 import {useNavigate} from "react-router";
+import {useDispatch, useSelector} from "react-redux";
+import userReducer from "@/reducer/user/index";
 
 function App(): JSX.Element {
-    const navigate = useNavigate();
-    const [token, setToken] = useState(window.localStorage.getItem('token'))
+    const user: any = useSelector((state: any) => state.user);
     useEffect(() => {
-      setToken(window.localStorage.getItem('token'))
+        console.log(user)
     }, [])
 
     return (
         <div className="App">
 
             <Routes>
-                {/* {!this.state.isLogin ? <Redirect to="/login" /> : null} */}
-                <Route path={"/login"} element={<Login/>}/>
-                <Route path={"/main"} element={<Main/>}/>
-                <Route path={"*"} element={<Navigate to={!token ? '/login' : '/main'}/>}/>
+                {!user.token ?
+                    <>
+                        <Route path={"/login"} element={<Login/>}/>
+                        <Route path={"*"} element={<Navigate to={'/login'}/>}/>
+                    </>
+                    : (
+                        <>
+                            <Route path={"/main"} element={<Main/>}/>
+                            <Route path={"/login"} element={<Login/>}/>
+                        </>
+
+                    )
+                }
             </Routes>
 
 
