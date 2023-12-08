@@ -1,0 +1,46 @@
+.page_login {
+  height: inherit;
+  background: url('../../static/bg/bg_login.png') no-repeat;
+  background-size: 100% 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .loginForm {
+    width: 900px;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    margin:0 20px;
+    .left {
+      padding: 85px 60px 130px 80px;
+      background-color: #EFF5FF;
+    }
+
+    .right {
+      padding: 225px 30px 130px 30px;
+    }
+
+    @media only screen and (max-width: 900px) {
+      .left {
+        display: none;
+      }
+      .right
+      {
+        width: 100%;
+      }
+    }
+    @media only screen and (min-width: 900px) {
+      .left,.right {
+        width: 50%;
+        img {
+          width: 340px;
+          height: 380px;
+        }
+      }
+
+    }
+
+  }
+}
