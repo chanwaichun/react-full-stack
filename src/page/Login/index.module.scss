@@ -1,0 +1,23 @@
+.page_login {
+  height: inherit;
+  background: url("@/static/bg/bg_login.png");
+}
+
+.login {
+  margin-top: -10vh;
+  height: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .login-form {
+    width: 500px;
+    border: 1px solid silver;
+    border-radius: 20px;
+    padding: 20px;
+  }
+}
+
+.test {
+  display: flex;
+}

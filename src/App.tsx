@@ -1,26 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useEffect, useState} from 'react';
+// import logo from './logo.svg';
+// import {login} from '@/api/user'
 import './App.css';
+import {
+    redirect,
+    Route,
+    Routes,
+    Navigate
+} from "react-router-dom";
+import Login from '@/page/Login'
+import Main from '@/page/Main'
+import {useNavigate} from "react-router";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+function App(): JSX.Element {
+    const navigate = useNavigate();
+    const [token, setToken] = useState(window.localStorage.getItem('token'))
+    useEffect(() => {
+      setToken(window.localStorage.getItem('token'))
+    }, [])
+
+    return (
+        <div className="App">
+
+            <Routes>
+                {/* {!this.state.isLogin ? <Redirect to="/login" /> : null} */}
+                <Route path={"/login"} element={<Login/>}/>
+                <Route path={"/main"} element={<Main/>}/>
+                <Route path={"*"} element={<Navigate to={!token ? '/login' : '/main'}/>}/>
+            </Routes>
+
+
+        </div>
+    )
+
+
 }
 
 export default App;
