@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 // import logo from './logo.svg';
 // import {login} from '@/api/user'
 import './App.css';
@@ -10,6 +10,7 @@ import {
 } from "react-router-dom";
 import Login from '@/page/Login'
 import Main from '@/page/Main'
+import Layout from '@/component/Layout'
 import {useNavigate} from "react-router";
 import {useDispatch, useSelector} from "react-redux";
 import userReducer from "@/reducer/user/index";
@@ -31,8 +32,10 @@ function App(): JSX.Element {
                     </>
                     : (
                         <>
+                            <Route path={"/"} element={<Layout/>}/>
                             <Route path={"/main"} element={<Main/>}/>
                             <Route path={"/login"} element={<Login/>}/>
+                            <Route path={"*"} element={<Navigate to={'/main'}/>}/>
                         </>
 
                     )
