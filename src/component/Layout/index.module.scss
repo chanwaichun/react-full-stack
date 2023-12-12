@@ -1,4 +1,23 @@
-.layout
-{
+.layout {
+  height: 100vh;
+  overflow: hidden;
+  .header {
+    padding: 16px;
+    height: 48px;
+    box-shadow: 0 0 50px #EFF5FF;
+  }
 
+  .body {
+    height: calc(100vh - 48px);
+    display: flex;
+
+    .menu {
+      width: 200px;
+    }
+    .content
+    {
+      padding: 16px;
+      flex: 1;
+    }
+  }
 }

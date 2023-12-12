@@ -1,6 +1,4 @@
 import React, {useEffect} from 'react';
-// import logo from './logo.svg';
-// import {login} from '@/api/user'
 import './App.css';
 import {
     redirect,
@@ -8,12 +6,11 @@ import {
     Routes,
     Navigate
 } from "react-router-dom";
-import Login from '@/page/Login'
+import Login from '@/page/User/Login'
 import Main from '@/page/Main'
 import Layout from '@/component/Layout'
-import {useNavigate} from "react-router";
+import Authorized from "@/component/Authorized";
 import {useDispatch, useSelector} from "react-redux";
-import userReducer from "@/reducer/user/index";
 
 function App(): JSX.Element {
     const user: any = useSelector((state: any) => state.user);
@@ -22,28 +19,29 @@ function App(): JSX.Element {
     }, [])
 
     return (
-        <div className="App">
 
-            <Routes>
-                {!user.token ?
+
+        <Routes>
+            {!user.token ?
+                <>
+                    <Route path={"/user"}>
+                        <Route path={"login"} element={<Login/>}/>
+                    </Route>
+                    <Route path={"*"} element={<Navigate to={'/user/login'}/>}/>
+                </>
+                : (
                     <>
-                        <Route path={"/login"} element={<Login/>}/>
-                        <Route path={"*"} element={<Navigate to={'/login'}/>}/>
+                        <Route path={"/"} element={<Authorized><Layout/></Authorized>}>
+                            <Route path={"main"} element={<Main/>}/>
+                            <Route path={'*'} element={<Authorized/>}></Route>
+                        </Route>
+                        <Route path={"/user"}>
+                            <Route path={"login"} element={<Login/>}/>
+                        </Route>
                     </>
-                    : (
-                        <>
-                            <Route path={"/"} element={<Layout/>}/>
-                            <Route path={"/main"} element={<Main/>}/>
-                            <Route path={"/login"} element={<Login/>}/>
-                            <Route path={"*"} element={<Navigate to={'/main'}/>}/>
-                        </>
-
-                    )
-                }
-            </Routes>
-
-
-        </div>
+                )
+            }
+        </Routes>
     )
 
 

@@ -1,7 +1,7 @@
 import React, {JSX, ReactNode, useState} from 'react';
 import {login} from "@/api/user";
 
-function Login(): JSX.Element {
+function Main(): JSX.Element {
     const [state, setState] = useState(0)
     const [form, setForm] = useState({user: '', password: ''})
 
@@ -31,4 +31,4 @@ function Login(): JSX.Element {
     )
 }
 
-export default Login
+export default Main

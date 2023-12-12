@@ -2,12 +2,13 @@ import {Button, Checkbox, Form, Input, message} from "antd";
 import React, {useState} from "react";
 import {login} from "@/api/user";
 import {useNavigate} from "react-router";
-import './index.scss'
+import './index.module.scss'
 import {setToken} from '@/reducer/user'
 import {useDispatch} from "react-redux";
+import style from './index.module.scss'
 
 
-export default function LoginForm() {
+export default function LoginForm(props:any) {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const [form] = useState({user: '', password: '', remember: false})
@@ -26,11 +27,16 @@ export default function LoginForm() {
     const onFinishFailed = (errorInfo: any) => {
         console.log('Failed:', errorInfo);
     };
+
+    function pathToRegister() {
+        props.changeFormType()
+    }
+
     return (
         <Form
             labelAlign={'left'}
             labelCol={{span: 4}}
-            className={'component_loginForm'}
+            className={style['registerForm']}
             name="basic"
             initialValues={form}
             onFinish={onFinish}
@@ -59,11 +65,12 @@ export default function LoginForm() {
                 style={{textAlign: 'left'}}
             >
                 <Checkbox>记住密码</Checkbox>
+                <a onClick={pathToRegister}>还没有账号？立马注册</a>
             </Form.Item>
 
             <Form.Item>
-                <Button className={'loginForm-button'} type="primary" htmlType="submit">
-                    登录
+                <Button className={style['registerForm-button']} type="primary" htmlType="submit">
+                    注册
                 </Button>
             </Form.Item>
         </Form>
