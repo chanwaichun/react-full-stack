@@ -1,24 +1,33 @@
 import {Button, Checkbox, Form, Input, message} from "antd";
 import React, {useState} from "react";
-import {login} from "@/api/user";
+import {register} from "@/api/user";
 import {useNavigate} from "react-router";
 import './index.module.scss'
 import {setToken} from '@/reducer/user'
 import {useDispatch} from "react-redux";
 import style from './index.module.scss'
+import {rules} from './formConfig'
 
-
-export default function LoginForm(props:any) {
+export default function LoginForm(props: any) {
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const [form] = useState({user: '', password: '', remember: false})
+    const [form] = Form.useForm()
+    const initialValues = {
+        password: '',
+        passwordSure: '',
+        userName: '',
+        phone: '',
+
+    }
     const onFinish = async (values: any) => {
         console.log('Success:', values);
+        const {phone, password, userName} = values
         try {
-            const res = await login(values);
-            dispatch(setToken(res.data))
-            //
-            navigate('/main')
+            await register({phone, password, userName});
+            message.success('注册成功')
+            props.changeFormType('login')
+            // console.log(res)
+            // navigate('/main')
         } catch (e) {
             console.log(e)
         }
@@ -29,16 +38,17 @@ export default function LoginForm(props:any) {
     };
 
     function pathToRegister() {
-        props.changeFormType()
+        props.changeFormType('register')
     }
 
     return (
         <Form
             labelAlign={'left'}
-            labelCol={{span: 4}}
+            labelCol={{span: 8}}
             className={style['registerForm']}
             name="basic"
-            initialValues={form}
+            form={form}
+            initialValues={initialValues}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}
             autoComplete="off"
@@ -46,28 +56,35 @@ export default function LoginForm(props:any) {
             <Form.Item
                 label="用户名"
                 name="userName"
-                required={false}
+
+                rules={rules.userName}
             >
                 <Input autoComplete={'none'}/>
             </Form.Item>
+            <Form.Item
+                label="手机号码"
+                name="phone"
 
+                rules={rules.phone}
+            >
+                <Input autoComplete={'none'}/>
+            </Form.Item>
             <Form.Item
                 label="密码"
                 name="password"
-                required={false}
-            >
-                <Input.Password autoComplete={'none'}/>
-            </Form.Item>
 
+                rules={rules.password}
+            >
+                <Input autoComplete={'none'}/>
+            </Form.Item>
             <Form.Item
-                name="remember"
-                valuePropName="checked"
-                style={{textAlign: 'left'}}
-            >
-                <Checkbox>记住密码</Checkbox>
-                <a onClick={pathToRegister}>还没有账号？立马注册</a>
-            </Form.Item>
+                label="确认密码"
+                name="passwordSure"
 
+                rules={rules.passwordSure}
+            >
+                <Input autoComplete={'none'}/>
+            </Form.Item>
             <Form.Item>
                 <Button className={style['registerForm-button']} type="primary" htmlType="submit">
                     注册

@@ -7,15 +7,14 @@ import {useNavigate} from "react-router";
 
 export default function Layout() {
     // const navigate =  useNavigate()
-    useEffect(()=>{
+    useEffect(() => {
         console.log(21)
 
-    },[])
+    }, [])
     return (
         <div className={style.layout}>
-            <div className={style.header}>
-                <Header></Header>
-            </div>
+
+            <Header></Header>
             <div className={style.body}>
                 <div className={style.menu}>
                     <Menu></Menu>

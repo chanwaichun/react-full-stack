@@ -19,8 +19,6 @@ function App(): JSX.Element {
     }, [])
 
     return (
-
-
         <Routes>
             {!user.token ?
                 <>

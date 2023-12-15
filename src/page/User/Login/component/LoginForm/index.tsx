@@ -15,6 +15,7 @@ export default function LoginForm(props:any) {
         try {
             const res = await login(values);
             dispatch(setToken(res.data))
+            // dispatch(setUserInfo())
             //
             navigate('/main')
         } catch (e) {

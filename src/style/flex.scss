@@ -1,0 +1,76 @@
+@mixin flex($direction: row) {
+  display: flex;
+  flex-direction: $direction;
+}
+@mixin flex-center() {
+  @include flex;
+  align-items: center;
+}
+@mixin flex-baseline()
+{
+  @include flex;
+  align-items: baseline;
+}
+@mixin flex-end()
+{
+  @include flex;
+  align-items: flex-end;
+}
+
+.flex {
+  @include flex;
+}
+.flex-1 {
+  flex: 1;
+}
+.flex-col {
+  @include flex(column);
+}
+.flex-end
+{
+  @include flex-end;
+}
+.flex-center {
+  @include flex-center;
+}
+@mixin setDirectionName($var)
+{
+  @if $var == 'space-bt' {
+    justify-content: space-between;
+  }
+  @if $var == 'space-ar' {
+    justify-content: space-around;
+  }
+  @if $var == 'end' {
+    justify-content: flex-end;
+  }
+  @if $var == 'center' {
+    justify-content: center;
+  }
+}
+
+@each $var in space-bt, space-ar, end, center {
+  .flex-end-#{$var}
+  {
+    @include flex-end;
+    @include setDirectionName($var)
+  }
+  .flex-start-#{$var}
+  {
+    @include flex;
+    @include setDirectionName($var)
+  }
+  .flex-col-center-#{$var} {
+    @include flex(column);
+    align-items: center;
+    @include setDirectionName($var)
+  }
+  .flex-center-#{$var} {
+    @include flex-center;
+    @include setDirectionName($var)
+  }
+  .flex-baseline-#{$var} {
+    @include flex-baseline;
+    @include setDirectionName($var)
+  }
+}
