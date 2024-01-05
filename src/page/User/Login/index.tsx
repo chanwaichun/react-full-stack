@@ -1,12 +1,9 @@
-import React, {JSX, ReactNode, useState} from 'react';
-import {login} from "@/api/user";
+import React, {JSX, useState} from 'react';
 import {useNavigate} from "react-router";
 import classNames from "classnames";
-import style from './index.module.scss'
 import './index.scss'
 import LoginForm from './component/LoginForm'
 import RegisterForm from './component/RegisterForm'
-import {type} from "@testing-library/user-event/dist/type";
 
 function Login(): JSX.Element {
     const [state, setState] = useState(0)
