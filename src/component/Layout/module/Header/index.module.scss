@@ -1,10 +1,18 @@
 .header {
   padding: 16px;
   background-color: #313447;
-  height: 48px;
   color: #E8E8F0;
 
   .left, .right {
     width: 50%;
   }
+
+  .right {
+    text-align: right;
+
+    .userInfo {
+      display: inline-flex;
+    }
+  }
+
 }
