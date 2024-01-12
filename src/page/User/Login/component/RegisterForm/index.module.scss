@@ -1,7 +1,16 @@
-.registerForm
-{
-  .registerForm-button
-  {
+.backBtn {
+  cursor: pointer;
+  display: inline-block;
+  font-size: 14px;
+  margin-bottom: 8px;
+
+  .icon {
+    margin-right: 4px;
+  }
+}
+
+.registerForm {
+  .registerForm-button {
     box-sizing: content-box;
     padding: 10px 0px;
     width: 100%;

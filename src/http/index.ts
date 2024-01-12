@@ -1,7 +1,8 @@
 import axios, { AxiosInstance, AxiosError, AxiosRequestConfig, InternalAxiosRequestConfig, AxiosResponse } from "axios";
 import { message } from "antd";
-import storage from "redux-persist/lib/storage";
+import { loginOut } from "@/reducer/user";
 import store from "@/store";
+import { redirect } from "react-router-dom";
 
 const config = {
 	baseURL: process.env.BASE_URL,
@@ -17,10 +18,8 @@ class RequestHttp {
 		this.service.interceptors.request.use(
 			(config: InternalAxiosRequestConfig) => {
 				const { token } = store.getState().user;
-				const localStorageToken = window.localStorage.getItem("token");
-				if (localStorageToken) {
-					config.headers.Authorization = token ? "Bearer " + token : "";
-				}
+
+				config.headers.Authorization = token ? "Bearer " + token : "";
 				return config;
 			},
 			(error: AxiosError) => {
@@ -30,13 +29,17 @@ class RequestHttp {
 		);
 		this.service.interceptors.response.use(
 			(response: AxiosResponse) => {
-				console.log(response);
 				return response.data;
 			},
 			async (error: any) => {
 				const responseData = error.response.data;
 				const errorType = Object.prototype.toString.call(responseData);
 
+				console.log(responseData);
+				if (responseData.code === 401) {
+					store.dispatch(loginOut());
+					window.location.href = "/#/user/login";
+				}
 				if (errorType === "[object String]") {
 					message.error(responseData);
 				}

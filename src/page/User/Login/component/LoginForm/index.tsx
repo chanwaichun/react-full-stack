@@ -15,7 +15,7 @@ export default function LoginForm(props: any) {
 		console.log("Success:", values);
 		try {
 			const res = await login(values);
-			dispatch(setToken(res.data));
+			await dispatch(setToken(res.data));
 			// @ts-ignore
 
 			dispatch(setInfo());
