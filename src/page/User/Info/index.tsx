@@ -1,12 +1,27 @@
 import style from "./index.module.scss";
 import { Button, Form, Input, Upload } from "antd";
 import { rules } from "@/page/User/Login/component/RegisterForm/formConfig";
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import { upload } from "@/api/user/index";
+import { type } from "@testing-library/user-event/dist/type";
 
 export default function Info() {
 	const [form] = Form.useForm();
 	const { info } = useSelector((state: any) => state.user);
+	const [fileList, setFileList] = useState([]);
+
+	function beforeUpload(file: any) {
+		console.log(file);
+	}
+
+	async function customRequest(obj: any) {
+		console.log(obj);
+		const formData = new FormData();
+		formData.append("file", obj.file);
+		await upload(formData, { "content-type": "multipart/form-data" });
+		// setFileList(obj.file);
+	}
 
 	function onFinish() {}
 
@@ -25,16 +40,17 @@ export default function Info() {
 				onFinishFailed={onFinishFailed}
 				autoComplete="off"
 			>
-				<Form.Item label="用户名" name="userName" rules={rules.userName}>
+				<Form.Item label="上传头像" name="avatar">
 					<Upload
+						action={""}
 						name="avatar"
 						listType="picture-card"
 						className="avatar-uploader"
-						showUploadList={false}
-						action="https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188"
+						fileList={fileList}
+						beforeUpload={beforeUpload}
+						customRequest={customRequest}
 					>
-						uploadButton
-						{/*{imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: "100%" }} /> : uploadButton}*/}
+						<Button>上传</Button>
 					</Upload>
 				</Form.Item>
 				<Form.Item label="用户名" name="userName" rules={rules.userName}>

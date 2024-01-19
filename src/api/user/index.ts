@@ -13,3 +13,7 @@ export const getUserInfo = (params: any) => {
 export const getUserList = (params: any) => {
 	return http.get(prefix + "/get/list", params, { headers: { noLoading: true } });
 };
+
+export const upload = (params: any, headers: any) => {
+	return http.post(prefix + "/upload", params, { headers: { "Content-Type": "multipart/form-data;charset=UTF-8" } });
+};

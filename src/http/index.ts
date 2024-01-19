@@ -5,7 +5,7 @@ import store from "@/store";
 import { redirect } from "react-router-dom";
 
 const config = {
-	baseURL: process.env.BASE_URL,
+	baseURL: "/",
 	// 设置超时时间（30s）
 	timeout: 30000
 };
@@ -15,11 +15,16 @@ class RequestHttp {
 
 	constructor(config: AxiosRequestConfig) {
 		this.service = axios.create(config);
+		// console.log(config);
 		this.service.interceptors.request.use(
 			(config: InternalAxiosRequestConfig) => {
 				const { token } = store.getState().user;
-
+				console.log(config.headers);
+				if (config.headers["Content-Type"]) {
+					config.headers.set("Content-Type", config.headers["Content-Type"]);
+				}
 				config.headers.Authorization = token ? "Bearer " + token : "";
+
 				return config;
 			},
 			(error: AxiosError) => {
