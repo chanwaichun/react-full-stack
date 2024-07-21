@@ -30,7 +30,6 @@ function Login(): JSX.Element {
                         formType === 'login' ?
                             <LoginForm changeFormType={(status: FormType) => changeFormType(status)}/> :
                             <RegisterForm changeFormType={(status: FormType) => changeFormType(status)}/>
-
                     }
                 </div>
 

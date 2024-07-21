@@ -10,8 +10,10 @@ export default function Authorized(props: any) {
 	const dispatch: Dispatch<any> = useDispatch<Dispatch>();
 	useEffect(() => {
 		console.log(22222);
+		//没有token 返回登录页
 		if (!user.token) {
 			navigate("/user/login");
+			return;
 		}
 		dispatch(setInfo());
 		navigate("/main");

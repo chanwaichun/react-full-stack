@@ -1,6 +1,5 @@
 import { Button, Checkbox, Form, Input, message } from "antd";
 import React, { useState } from "react";
-import { ArrowLeftOutlined } from "@ant-design/icons";
 import { register } from "@/api/user";
 import { useNavigate } from "react-router";
 import "./index.module.scss";
@@ -43,7 +42,7 @@ export default function LoginForm(props: any) {
 	return (
 		<>
 			<span className={style.backBtn} onClick={() => pathToLogin()}>
-				<ArrowLeftOutlined className={style.icon} />
+				{/*<ArrowLeftOutlined className={style.icon} />*/}
 				<span>返回</span>
 			</span>
 			<Form
