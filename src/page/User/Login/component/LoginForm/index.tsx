@@ -10,7 +10,7 @@ import { Dispatch } from "@reduxjs/toolkit";
 export default function LoginForm(props: any) {
 	const navigate = useNavigate();
 	const dispatch = useDispatch<Dispatch>();
-	const [form] = useState({ user: "", password: "", remember: false });
+	const [form] = useState({ userName: "", password: "", remember: false });
 	const onFinish = async (values: any) => {
 		console.log("Success:", values);
 		try {
@@ -45,11 +45,11 @@ export default function LoginForm(props: any) {
 			onFinishFailed={onFinishFailed}
 			autoComplete="off"
 		>
-			<Form.Item label="用户名" name="userName" required={false}>
+			<Form.Item label="用户名" name="userName" required={true}>
 				<Input autoComplete={"none"} />
 			</Form.Item>
 
-			<Form.Item label="密码" name="password" required={false}>
+			<Form.Item label="密码" name="password" required={true}>
 				<Input.Password autoComplete={"none"} />
 			</Form.Item>
 
