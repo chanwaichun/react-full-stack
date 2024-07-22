@@ -4,12 +4,14 @@ import { rules } from "@/page/User/Login/component/RegisterForm/formConfig";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { upload } from "@/api/user/index";
-import { type } from "@testing-library/user-event/dist/type";
+import { PlusOutlined } from "@ant-design/icons";
+import ImgCrop from "antd-img-crop";
 
 export default function Info() {
 	const [form] = Form.useForm();
 	const { info } = useSelector((state: any) => state.user);
-	const [fileList, setFileList] = useState([]);
+	const [currentInfo, setCurrentInfo] = useState(info);
+	const [fileList, setFileList]: any = useState([]);
 
 	function beforeUpload(file: any) {
 		console.log(file);
@@ -18,14 +20,22 @@ export default function Info() {
 	async function customRequest(obj: any) {
 		console.log(obj);
 		const formData = new FormData();
+		setFileList([{ url: URL.createObjectURL(obj.file) }]);
 		formData.append("file", obj.file);
-		await upload(formData, { "content-type": "multipart/form-data" });
+		const res = await upload(formData, { "content-type": "multipart/form-data;charset=utf-8" });
+		setCurrentInfo({ ...currentInfo, avatar: res.data });
 		// setFileList(obj.file);
 	}
 
-	function onFinish() {}
+	function onFinish(values: any) {
+		console.log(values, currentInfo);
+	}
 
 	function onFinishFailed() {}
+
+	function onChange({ fileList: newFileList }: any) {
+		setFileList(newFileList);
+	}
 
 	return (
 		<div className={style.userInfo}>
@@ -35,7 +45,7 @@ export default function Info() {
 				className={style["registerForm"]}
 				name="basic"
 				form={form}
-				initialValues={info}
+				initialValues={currentInfo}
 				onFinish={onFinish}
 				onFinishFailed={onFinishFailed}
 				autoComplete="off"
@@ -47,10 +57,11 @@ export default function Info() {
 						listType="picture-card"
 						className="avatar-uploader"
 						fileList={fileList}
+						onChange={onChange}
 						beforeUpload={beforeUpload}
 						customRequest={customRequest}
 					>
-						<Button>上传</Button>
+						<PlusOutlined style={{ color: "#F8F9FD" }} />
 					</Upload>
 				</Form.Item>
 				<Form.Item label="用户名" name="userName" rules={rules.userName}>
