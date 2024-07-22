@@ -1,4 +1,5 @@
-import { Table, TableProps } from "antd";
+import {Table, TableProps} from "antd";
+// @ts-ignore
 import PropTypes from "prop-types";
 
 export default function CommonTable(props: Partial<TableProps<any>>) {

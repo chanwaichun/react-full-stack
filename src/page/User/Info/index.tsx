@@ -1,11 +1,10 @@
 import style from "./index.module.scss";
-import { Button, Form, Input, Upload } from "antd";
-import { rules } from "@/page/User/Login/component/RegisterForm/formConfig";
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import { upload } from "@/api/user/index";
-import { PlusOutlined } from "@ant-design/icons";
-import ImgCrop from "antd-img-crop";
+import {Button, Form, Input, Upload} from "antd";
+import {rules} from "@/page/User/Login/component/RegisterForm/formConfig";
+import React, {useState} from "react";
+import {useSelector} from "react-redux";
+import {upload} from "@/api/user/index";
+// import { PlusOutlined } from "@ant-design/icons";
 
 export default function Info() {
 	const [form] = Form.useForm();
@@ -61,7 +60,7 @@ export default function Info() {
 						beforeUpload={beforeUpload}
 						customRequest={customRequest}
 					>
-						<PlusOutlined style={{ color: "#F8F9FD" }} />
+						{/*<PlusOutlined style={{ color: "#F8F9FD" }} />*/}
 					</Upload>
 				</Form.Item>
 				<Form.Item label="用户名" name="userName" rules={rules.userName}>

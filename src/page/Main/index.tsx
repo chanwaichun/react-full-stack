@@ -1,32 +1,26 @@
-import React, {JSX, ReactNode, useState} from 'react';
-import {login} from "@/api/user";
+import React, {JSX, useEffect, useRef} from 'react';
+import style from './index.module.scss'
+import SubjectList from "@/page/Main/componet/SubjectList";
+import {SubjectListRef} from "@/page/Main/componet/SubjectList/type";
 
+// 首页展示需要考试的科目
 function Main(): JSX.Element {
-    const [state, setState] = useState(0)
-    const [form, setForm] = useState({user: '', password: ''})
-
-    async function handleLogin() {
-        try {
-            const res = await login(form);
-            console.log(res)
-            window.localStorage.setItem('token', res.data)
-        } catch (e) {
-            console.log(e)
+    const ref: React.MutableRefObject<null | SubjectListRef> = useRef(null)
+    useEffect(() => {
+        // mock
+        if (ref.current) {
+            ref.current.handleSetSubjectList([{
+                title: 'subject A',
+                count: 'subject count'
+            }, {
+                title: 'subject B',
+                count: 'subject count2'
+            }])
         }
-
-
-    }
-
-    function handleChangeForm(e: any, type: string) {
-        console.log(form)
-        const currentForm = {...form, [type]: e.target.value}
-        console.log(currentForm)
-        setForm(currentForm)
-    }
-
+    }, [ref])
     return (
-        <div className={'login'}>
-            11111111
+        <div className={style.main}>
+            <SubjectList ref={ref}></SubjectList>
         </div>
     )
 }
