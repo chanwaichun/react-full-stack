@@ -1,3 +1,3 @@
 export type SubjectListRef = {
-    handleSetSubjectList: Function
+	handleSetSubjectList: Function;
 };

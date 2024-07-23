@@ -1,8 +1,7 @@
-import axios, { AxiosInstance, AxiosError, AxiosRequestConfig, InternalAxiosRequestConfig, AxiosResponse } from "axios";
-import { message } from "antd";
-import { loginOut } from "@/reducer/user";
+import axios, {AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse, InternalAxiosRequestConfig} from "axios";
+import {message} from "antd";
+import {loginOut} from "@/reducer/user";
 import store from "@/store";
-import { redirect } from "react-router-dom";
 
 const config = {
 	baseURL: "/",
@@ -18,8 +17,7 @@ class RequestHttp {
 		// console.log(config);
 		this.service.interceptors.request.use(
 			(config: InternalAxiosRequestConfig) => {
-				const { token } = store.getState().user;
-				console.log(config.headers);
+				const {token} = store.getState().user;
 				if (config.headers["Content-Type"]) {
 					config.headers.set("Content-Type", config.headers["Content-Type"]);
 				}
@@ -34,20 +32,27 @@ class RequestHttp {
 		);
 		this.service.interceptors.response.use(
 			(response: AxiosResponse) => {
-				return response.data;
+				debugger;
+				if (response.data.code === 200) {
+					return response.data;
+				}
+				const responseData = response.data;
+				if (response.data.code === 401) {
+					store.dispatch(loginOut());
+					window.location.href = "/#/user/login";
+					message.error(responseData.msg);
+					return Promise.reject(responseData);
+				} else {
+					const errorType = Object.prototype.toString.call(responseData);
+					if (errorType === "[object Object]") {
+						message.error(responseData.msg);
+					}
+					return Promise.reject(responseData);
+				}
 			},
 			async (error: any) => {
 				const responseData = error.response.data;
 				const errorType = Object.prototype.toString.call(responseData);
-
-				console.log(responseData);
-				if (responseData.code === 401) {
-					store.dispatch(loginOut());
-					window.location.href = "/#/user/login";
-				}
-				if (errorType === "[object String]") {
-					message.error(responseData);
-				}
 				if (errorType === "[object Object]") {
 					message.error(responseData.msg);
 				}
@@ -57,7 +62,7 @@ class RequestHttp {
 	}
 
 	get(url: string, params?: object, _object = {}): Promise<any> {
-		return this.service.get(url, { params, ..._object });
+		return this.service.get(url, {params, ..._object});
 	}
 
 	post(url: string, params?: object, _object = {}): Promise<any> {

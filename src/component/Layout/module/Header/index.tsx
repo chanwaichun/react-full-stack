@@ -1,15 +1,14 @@
 import style from "./index.module.scss";
 import classNames from "classnames";
-import Toolbar from "@/component/Layout/module/Toolbar";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Dropdown, Avatar, MenuProps, message } from "antd";
-import { Dispatch } from "@reduxjs/toolkit";
-import { loginOut } from "@/reducer/user";
-import { useNavigate } from "react-router";
+import {forwardRef, useEffect, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {Avatar, Dropdown, MenuProps, message} from "antd";
+import {Dispatch} from "@reduxjs/toolkit";
+import {loginOut} from "@/reducer/user";
+import {useNavigate} from "react-router";
 
 export default function Header() {
-	const { info } = useSelector((state: any) => state.user);
+	const {info} = useSelector((state: any) => state.user);
 	const navigate = useNavigate();
 	const dispatch = useDispatch<Dispatch>();
 	const items: MenuProps["items"] = [
@@ -26,13 +25,15 @@ export default function Header() {
 
 	function handleClick(menuInfo: any) {
 		console.log(menuInfo);
-		const { key } = menuInfo;
+		const {key} = menuInfo;
+		// 登出操作
 		if (key === "loginOut") {
 			dispatch(loginOut());
 			message.success("登出成功");
 			navigate("/user/login");
 			return;
 		}
+		// 编辑信息
 		if (key === "editInfo") {
 			navigate("/user/info");
 		}
@@ -44,7 +45,7 @@ export default function Header() {
 				<div className={style.left}>mangeSystem</div>
 
 				<div className={classNames([style.right])}>
-					<Dropdown menu={{ items, onClick: handleClick }} trigger={["click"]}>
+					<Dropdown menu={{items, onClick: handleClick}} trigger={["click"]}>
 						<div
 							className={classNames(["flex-center-end", style.userInfo])}
 							onClick={e => {
@@ -52,7 +53,7 @@ export default function Header() {
 							}}
 						>
 							<span>{info.userName || ""}</span>
-							<Avatar src={info.userImg} style={{ marginLeft: "8px" }}></Avatar>
+							<Avatar src={info.userImg} style={{marginLeft: "8px"}}></Avatar>
 						</div>
 					</Dropdown>
 				</div>
@@ -60,3 +61,8 @@ export default function Header() {
 		)
 	);
 }
+
+export const Info = forwardRef(function Info(prop, ref) {
+	const [show, handleShow] = useState(false);
+	return <div className={style.info}></div>;
+});

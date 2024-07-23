@@ -14,7 +14,7 @@ module.exports = {
 	// 更改引用对象属性的时间 可选值 "<as-needed|consistent|preserve>"
 	quoteProps: "as-needed",
 	// 在对象，数组括号与文字之间加空格 "{ foo: bar }"
-	bracketSpacing: true,
+	bracketSpacing: false,
 	// 多行时尽可能打印尾随逗号。（例如，单行数组永远不会出现逗号结尾。） 可选值"<none|es5|all>"，默认none
 	trailingComma: "none",
 	// 在JSX中使用单引号而不是双引号

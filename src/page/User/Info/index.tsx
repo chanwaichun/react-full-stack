@@ -8,7 +8,7 @@ import {upload} from "@/api/user/index";
 
 export default function Info() {
 	const [form] = Form.useForm();
-	const { info } = useSelector((state: any) => state.user);
+	const {info} = useSelector((state: any) => state.user);
 	const [currentInfo, setCurrentInfo] = useState(info);
 	const [fileList, setFileList]: any = useState([]);
 
@@ -19,10 +19,10 @@ export default function Info() {
 	async function customRequest(obj: any) {
 		console.log(obj);
 		const formData = new FormData();
-		setFileList([{ url: URL.createObjectURL(obj.file) }]);
+		setFileList([{url: URL.createObjectURL(obj.file)}]);
 		formData.append("file", obj.file);
-		const res = await upload(formData, { "content-type": "multipart/form-data;charset=utf-8" });
-		setCurrentInfo({ ...currentInfo, avatar: res.data });
+		const res = await upload(formData, {"content-type": "multipart/form-data;charset=utf-8"});
+		setCurrentInfo({...currentInfo, avatar: res.data});
 		// setFileList(obj.file);
 	}
 
@@ -32,7 +32,7 @@ export default function Info() {
 
 	function onFinishFailed() {}
 
-	function onChange({ fileList: newFileList }: any) {
+	function onChange({fileList: newFileList}: any) {
 		setFileList(newFileList);
 	}
 
@@ -40,7 +40,7 @@ export default function Info() {
 		<div className={style.userInfo}>
 			<Form
 				labelAlign={"left"}
-				labelCol={{ span: 8 }}
+				labelCol={{span: 8}}
 				className={style["registerForm"]}
 				name="basic"
 				form={form}

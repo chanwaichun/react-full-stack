@@ -7,26 +7,25 @@ import {ConfigProvider} from "antd";
 import primaryTheme from "@/config/primaryTheme";
 
 export default function Layout(props: any) {
-    useEffect(() => {
-        return () => {
-        };
-    }, []);
-    return useMemo(
-        () => (
-            <ConfigProvider theme={primaryTheme}>
-                <div className={style.layout}>
-                    <Header></Header>
-                    <div className={style.body}>
-                        {/*<div className={style.menu}>*/}
-                        {/*    <SideMenu></SideMenu>*/}
-                        {/*</div>*/}
-                        <div className={style.content}>
-                            <Outlet/>
-                        </div>
-                    </div>
-                </div>
-            </ConfigProvider>
-        ),
-        []
-    );
+	useEffect(() => {
+		return () => {};
+	}, []);
+	return useMemo(
+		() => (
+			<ConfigProvider theme={primaryTheme}>
+				<div className={style.layout}>
+					<Header></Header>
+					<div className={style.body}>
+						{/*<div className={style.menu}>*/}
+						{/*    <SideMenu></SideMenu>*/}
+						{/*</div>*/}
+						<div className={style.content}>
+							<Outlet />
+						</div>
+					</div>
+				</div>
+			</ConfigProvider>
+		),
+		[]
+	);
 }
