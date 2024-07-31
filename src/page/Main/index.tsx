@@ -1,11 +1,16 @@
-import React, {JSX, useEffect, useRef} from "react";
+import React, {
+	JSX,
+	useEffect,
+	useRef
+} from "react";
 import style from "./index.module.scss";
-import SubjectList from "@/page/Main/componet/SubjectList";
-import {SubjectListRef} from "@/page/Main/componet/SubjectList/type";
+import SubjectList from "@/page/Main/component/SubjectList";
+import { SubjectListRef } from "@/page/Main/component/SubjectList/type";
 
 // 首页展示需要考试的科目
 function Main(): JSX.Element {
-	const ref: React.MutableRefObject<null | SubjectListRef> = useRef(null);
+	const ref: React.MutableRefObject<null | SubjectListRef> =
+		useRef(null);
 	useEffect(() => {
 		// mock
 		if (ref.current) {

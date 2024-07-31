@@ -1,18 +1,21 @@
 import React from "react";
 import Main from "@/page/Main";
-import {Navigate} from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import SystemUser from "@/page/System/User";
 import Authorized from "@/component/Authorized";
 import UserInfo from "@/page/User/Info";
 
 export const businessRouter = [
 	{
+		path: "/",
+		element: () => <Navigate to={"/main"} />
+	},
+	{
 		path: "/main",
 		element: () => <Main></Main>,
 		name: "main",
 		meta: {
 			icon: "HomeFilled",
-
 			title: "首页",
 			isLink: "",
 			isHide: false,
