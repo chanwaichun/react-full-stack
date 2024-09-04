@@ -5,7 +5,7 @@ export default function useGetApiData(api: any, params: any) {
 	const [data, setData] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const [pagination, setPagination] = useState(COMMON_PAGINATION);
-	const request = useCallback(async (currentParams: any) => {
+	const request = useCallback(async (currentParams?: any) => {
 		setLoading(true);
 		try {
 			const { data } = await api(currentParams || params);

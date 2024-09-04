@@ -1,18 +1,22 @@
+
 .header {
   padding: 16px;
-  background-color: #313447;
+  background-color: #4096ff;
   color: #E8E8F0;
 
-  .left, .right {
-    width: 50%;
-  }
-
-  .right {
-    text-align: right;
-
-    .userInfo {
-      display: inline-flex;
+  :global {
+    .left, .right {
+      width: 50%;
     }
+
+    .right {
+      text-align: right;
+
+      .userInfo {
+        display: inline-flex;
+      }
+    }
+
   }
 
 }

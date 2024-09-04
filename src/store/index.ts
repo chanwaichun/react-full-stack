@@ -3,6 +3,7 @@ import {userReducer} from "@/reducer/user";
 import {persistStore, persistReducer} from 'redux-persist';
 import storage from 'redux-persist/lib/storage'
 
+
 const persistConfig = {
     key: 'redux',
     storage,
@@ -18,5 +19,6 @@ const store = configureStore({
     devTools: process.env.NODE_ENV === 'development',
     reducer: currentPersistReducer
 })
+export type AppDispatch = typeof store.dispatch
 export const currentPersistStore = persistStore(store)
 export default store;

@@ -41,18 +41,18 @@ export default function Header() {
 	return (
 		info && (
 			<div className={classNames([style.header, "flex-center-space-bt"])}>
-				<div className={style.left}>mangeSystem</div>
+				<div className={'left'}>mangeSystem</div>
 
-				<div className={classNames([style.right])}>
+				<div className={classNames(['right'])}>
 					<Dropdown menu={{ items, onClick: handleClick }} trigger={["click"]}>
 						<div
-							className={classNames(["flex-center-end", style.userInfo])}
+							className={classNames(["flex-center-end", 'userInfo'])}
 							onClick={e => {
 								e.preventDefault();
 							}}
 						>
 							<span>{info.userName || ""}</span>
-							<Avatar src={info.userImg} style={{ marginLeft: "8px" }}></Avatar>
+							<Avatar src={'userImg'} style={{ marginLeft: "8px" }}></Avatar>
 						</div>
 					</Dropdown>
 				</div>
