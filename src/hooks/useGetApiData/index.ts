@@ -1,5 +1,5 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
-import { COMMON_PAGINATION } from "@/util/constant";
+import {useCallback, useEffect, useMemo, useState} from "react";
+import {COMMON_PAGINATION} from "@/util/constant";
 
 export default function useGetApiData(api: any, params: any) {
 	const [data, setData] = useState([]);
@@ -8,11 +8,11 @@ export default function useGetApiData(api: any, params: any) {
 	const request = useCallback(async (currentParams?: any) => {
 		setLoading(true);
 		try {
-			const { data } = await api(currentParams || params);
+			const {data} = await api(currentParams || params);
 			if (data.hasOwnProperty("records")) {
-				const { pageSize, pageNum, total, records } = data;
+				const {pageSize, pageNum, total, records} = data;
 				setData(records);
-				setPagination({ ...pagination, pageNum, pageSize, total });
+				setPagination({...pagination, pageNum, pageSize, total});
 			} else {
 				setData(data);
 			}
@@ -23,10 +23,10 @@ export default function useGetApiData(api: any, params: any) {
 		setLoading(false);
 	}, []);
 	const paginationChange = async (paginationParams: any) => {
-		const { current, pageSize, total } = paginationParams;
-		setPagination({ ...pagination, pageNum: current, pageSize, total });
-		await request({ pageNum: current, pageSize });
+		const {current, pageSize, total} = paginationParams;
+		setPagination({...pagination, pageNum: current, pageSize, total});
+		await request({pageNum: current, pageSize});
 	};
 
-	return { data, loading, request, pagination, paginationChange };
+	return {data, loading, request, pagination, paginationChange};
 }

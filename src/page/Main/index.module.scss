@@ -1,0 +1,29 @@
+.main {
+  :global {
+    .subject-list {
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+
+      .subject-item {
+        height: 400px;
+        width: 300px;
+        border-radius: 5px;
+        border: 2px solid red;
+        margin-right: 30px;
+
+        &:first-child {
+          margin-left: 0;
+        }
+
+        .item-title {
+          font-size: 12px;
+        }
+
+        img {
+          width: 100%;
+        }
+      }
+    }
+  }
+}

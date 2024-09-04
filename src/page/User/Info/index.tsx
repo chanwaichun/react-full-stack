@@ -1,40 +1,66 @@
 import style from "./index.module.scss";
-import { Button, Form, Input, Upload } from "antd";
-import { rules } from "@/page/User/Login/component/RegisterForm/formConfig";
-import React from "react";
-import { useSelector } from "react-redux";
+import {Button, Form, Input, Upload} from "antd";
+import {rules} from "@/page/User/Login/component/RegisterForm/formConfig";
+import React, {useState} from "react";
+import {useSelector} from "react-redux";
+import {upload} from "@/api/user/index";
+// import { PlusOutlined } from "@ant-design/icons";
 
 export default function Info() {
 	const [form] = Form.useForm();
-	const { info } = useSelector((state: any) => state.user);
+	const {info} = useSelector((state: any) => state.user);
+	const [currentInfo, setCurrentInfo] = useState(info);
+	const [fileList, setFileList]: any = useState([]);
 
-	function onFinish() {}
+	function beforeUpload(file: any) {
+		console.log(file);
+	}
+
+	async function customRequest(obj: any) {
+		console.log(obj);
+		const formData = new FormData();
+		setFileList([{url: URL.createObjectURL(obj.file)}]);
+		formData.append("file", obj.file);
+		const res = await upload(formData, {"content-type": "multipart/form-data;charset=utf-8"});
+		setCurrentInfo({...currentInfo, avatar: res.data});
+		// setFileList(obj.file);
+	}
+
+	function onFinish(values: any) {
+		console.log(values, currentInfo);
+	}
 
 	function onFinishFailed() {}
+
+	function onChange({fileList: newFileList}: any) {
+		setFileList(newFileList);
+	}
 
 	return (
 		<div className={style.userInfo}>
 			<Form
 				labelAlign={"left"}
-				labelCol={{ span: 8 }}
+				labelCol={{span: 8}}
 				className={style["registerForm"]}
 				name="basic"
 				form={form}
-				initialValues={info}
+				initialValues={currentInfo}
 				onFinish={onFinish}
 				onFinishFailed={onFinishFailed}
 				autoComplete="off"
 			>
-				<Form.Item label="用户名" name="userName" rules={rules.userName}>
+				<Form.Item label="上传头像" name="avatar">
 					<Upload
+						action={""}
 						name="avatar"
 						listType="picture-card"
 						className="avatar-uploader"
-						showUploadList={false}
-						action="https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188"
+						fileList={fileList}
+						onChange={onChange}
+						beforeUpload={beforeUpload}
+						customRequest={customRequest}
 					>
-						uploadButton
-						{/*{imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: "100%" }} /> : uploadButton}*/}
+						{/*<PlusOutlined style={{ color: "#F8F9FD" }} />*/}
 					</Upload>
 				</Form.Item>
 				<Form.Item label="用户名" name="userName" rules={rules.userName}>

@@ -1,22 +1,35 @@
 import { useEffect, useMemo } from "react";
-import { useNavigate } from "react-router";
-import { useDispatch, useSelector } from "react-redux";
+import {
+	useLocation,
+	useNavigate
+} from "react-router";
+import {
+	useDispatch,
+	useSelector
+} from "react-redux";
 import { Dispatch } from "@reduxjs/toolkit";
-import { setInfo } from "@/reducer/user";
+import { getInfo } from "@/reducer/user";
 
 export default function Authorized(props: any) {
 	const navigate = useNavigate();
-	const user: any = useSelector((state: any) => state.user);
-	const dispatch: Dispatch<any> = useDispatch<Dispatch>();
+	const location = useLocation();
+	const user: any = useSelector(
+		(state: any) => state.user
+	);
+	const dispatch: Dispatch<any> =
+		useDispatch<Dispatch>();
 	useEffect(() => {
-		console.log(22222);
 		//没有token 返回登录页
 		if (!user.token) {
 			navigate("/user/login");
 			return;
 		}
-		dispatch(setInfo());
-		navigate("/main");
-	}, []);
-	return useMemo(() => <>{props.children}</>, [props.children]);
+		console.log(location);
+		dispatch(getInfo());
+		navigate(location.pathname);
+	}, [user.token]);
+	return useMemo(
+		() => <>{props.children}</>,
+		[props.children]
+	);
 }

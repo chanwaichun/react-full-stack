@@ -1,17 +1,17 @@
 import style from "./index.module.scss";
-import { Menu } from "antd";
-import { businessRouter } from "@/route";
-import { useLocation, useNavigate } from "react-router";
-import { useEffect, useState } from "react";
+import {Menu} from "antd";
+import {businessRouter} from "@/route";
+import {useLocation, useNavigate} from "react-router";
+import {useEffect, useState} from "react";
 
 function setMenuItem(routerList: any, parent: boolean = true) {
 	return routerList.reduce((prev: Array<any>, current: any) => {
-		const config: { label: string; key: string; type?: string } = {
+		const config: {label: string; key: string; type?: string} = {
 			label: current.meta?.title,
 			key: current.path
 		};
 		if (current.children) {
-			return current.meta?.isHide ? prev : [...prev, { ...config, children: setMenuItem(current.children, false) }];
+			return current.meta?.isHide ? prev : [...prev, {...config, children: setMenuItem(current.children, false)}];
 		} else {
 			return current.meta?.isHide ? prev : [...prev, config];
 		}
@@ -37,7 +37,7 @@ export default function SideMenu() {
 			<Menu
 				theme={"light"}
 				onClick={e => handleClick(e)}
-				style={{ width: "100%" }}
+				style={{width: "100%"}}
 				selectedKeys={selectedKeys}
 				mode="inline"
 				items={menuItems}

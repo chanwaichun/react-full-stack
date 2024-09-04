@@ -1,12 +1,12 @@
-import { Button, Checkbox, Form, Input, message } from "antd";
-import React, { useState } from "react";
-import { register } from "@/api/user";
-import { useNavigate } from "react-router";
+import {Button, Checkbox, Form, Input, message} from "antd";
+import React, {useState} from "react";
+import {register} from "@/api/user";
+import {useNavigate} from "react-router";
 import "./index.module.scss";
-import { setToken } from "@/reducer/user";
-import { useDispatch } from "react-redux";
+import {setToken} from "@/reducer/user";
+import {useDispatch} from "react-redux";
 import style from "./index.module.scss";
-import { rules } from "./formConfig";
+import {rules} from "./formConfig";
 
 export default function LoginForm(props: any) {
 	const navigate = useNavigate();
@@ -20,9 +20,9 @@ export default function LoginForm(props: any) {
 	};
 	const onFinish = async (values: any) => {
 		console.log("Success:", values);
-		const { phone, password, userName } = values;
+		const {phone, password, userName} = values;
 		try {
-			await register({ phone, password, userName });
+			await register({phone, password, userName});
 			message.success("注册成功");
 			props.changeFormType("login");
 			// console.log(res)
@@ -47,7 +47,7 @@ export default function LoginForm(props: any) {
 			</span>
 			<Form
 				labelAlign={"left"}
-				labelCol={{ span: 8 }}
+				labelCol={{span: 8}}
 				className={style["registerForm"]}
 				name="basic"
 				form={form}
