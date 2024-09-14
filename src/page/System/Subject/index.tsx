@@ -1,16 +1,16 @@
 import style from "./index.module.scss";
-import { Button, Modal, Table } from "antd";
+import {Button, Modal, Table} from "antd";
 import useGetApiData from "@/hooks/useGetApiData";
-import { getUserList } from "@/api/user";
-import { useEffect, useMemo } from "react";
+import {getUserList} from "@/api/user";
+import {useEffect, useMemo} from "react";
 import CommonTable from "@/component/CommonTable";
-import { filterEnum, setTablePagination } from "@/util";
-import { dataStatus } from "@/util/serviceDict";
+import {filterEnum, setTablePagination} from "@/util";
+import {dataStatus} from "@/util/serviceDict";
 
 export default function SystemSubject() {
-	const { data, request, loading, pagination, paginationChange } = useGetApiData(getUserList, {
+	const {data, request, loading, pagination, paginationChange} = useGetApiData(getUserList, {
 		pageNum: 1,
-		pageSize: 10,
+		pageSize: 10
 	});
 	useEffect(() => {
 		handleRequest();
@@ -39,17 +39,17 @@ export default function SystemSubject() {
 					{
 						title: "id",
 						dataIndex: "userId",
-						key: "userId",
+						key: "userId"
 					},
 					{
 						title: "用户姓名",
 						dataIndex: "userName",
-						key: "userName",
+						key: "userName"
 					},
 					{
 						title: "手机号码",
 						dataIndex: "phone",
-						key: "phone",
+						key: "phone"
 					},
 					{
 						title: "状态",
@@ -57,8 +57,8 @@ export default function SystemSubject() {
 						key: "dataStatus",
 						render: (value, record, index) => {
 							return filterEnum(value, dataStatus);
-						},
-					},
+						}
+					}
 				]}
 				dataSource={data}
 			></CommonTable>

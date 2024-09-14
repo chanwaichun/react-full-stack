@@ -1,4 +1,3 @@
-import Layout from "@/component/Layout";
 import React from "react";
 import Main from "@/page/Main";
 import {Navigate} from "react-router-dom";

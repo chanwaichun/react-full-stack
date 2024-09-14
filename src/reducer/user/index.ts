@@ -1,16 +1,10 @@
-import {
-	createAsyncThunk,
-	createSlice
-} from "@reduxjs/toolkit";
-import { getUserInfo } from "@/api/user";
+import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import {getUserInfo} from "@/api/user";
 
-export const getInfo = createAsyncThunk(
-	"user/getInfo",
-	async (state, _) => {
-		const res = await getUserInfo({});
-		return res.data;
-	}
-);
+export const getInfo = createAsyncThunk("user/getInfo", async (state, _) => {
+	const res = await getUserInfo({});
+	return res.data;
+});
 type StateType = {
 	token: string | null;
 	info: null | Object;
@@ -36,23 +30,13 @@ const userSlice = createSlice({
 	},
 	extraReducers: builder => {
 		builder
-			.addCase(
-				getInfo.pending,
-				(state, action) => {}
-			)
-			.addCase(
-				getInfo.fulfilled,
-				(state, action) => {
-					state.info = action.payload;
-				}
-			)
-			.addCase(
-				getInfo.rejected,
-				(state, action) => {}
-			);
+			.addCase(getInfo.pending, (state, action) => {})
+			.addCase(getInfo.fulfilled, (state, action) => {
+				state.info = action.payload;
+			})
+			.addCase(getInfo.rejected, (state, action) => {});
 	}
 });
 // 切片对象会自动的帮助我们生成action
-export const { reducer: userReducer } = userSlice;
-export const { setToken, loginOut } =
-	userSlice.actions;
+export const {reducer: userReducer} = userSlice;
+export const {setToken, loginOut} = userSlice.actions;

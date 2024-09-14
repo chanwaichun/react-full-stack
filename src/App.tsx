@@ -1,10 +1,11 @@
-import React, { useMemo } from "react";
+import React, {useMemo} from "react";
 import "./App.css";
-import { Route, Routes } from "react-router-dom";
+import {Route, Routes} from "react-router-dom";
 import Login from "@/page/User/Login";
 import Layout from "@/component/Layout";
 import Authorized from "@/component/Authorized";
-import { businessRouter } from "@/route";
+import {businessRouter} from "@/route";
+import NoticeIndex from "@/page/Notice";
 
 function RenderRoute(routeList: any): any {
 	return routeList.map((item: any) => {
@@ -13,13 +14,7 @@ function RenderRoute(routeList: any): any {
 			return RenderRoute(item.children);
 		} else {
 			// 没有子路由
-			return (
-				<Route
-					path={item.path}
-					key={item.name}
-					element={item.element()}
-				/>
-			);
+			return <Route path={item.path} key={item.name} element={item.element()} />;
 		}
 	});
 }
@@ -39,10 +34,10 @@ function App(): JSX.Element {
 					{RenderRoute(businessRouter)}
 				</Route>
 				<Route path={"/user"}>
-					<Route
-						path={"login"}
-						element={<Login />}
-					/>
+					<Route path={"login"} element={<Login />} />
+				</Route>
+				<Route path={"/notice"}>
+					<Route path={"index"} element={<NoticeIndex />} />
 				</Route>
 			</Routes>
 		),
