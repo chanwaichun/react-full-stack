@@ -1,12 +1,24 @@
-// @ts-ignore
-import {Manager} from "https://cdn.socket.io/4.7.5/socket.io.esm.min.js";
+import {Button} from "antd";
+import useWebsocket from "@/hooks/useWebsocket";
+import {useEffect} from "react";
 
 export default function NoticeIndex() {
-	const manager = new Manager("ws://localhost:80");
-	const socket = manager.socket("/notice");
-	setInterval(() => {
-		socket.emit("message", {a: "b", c: []});
-	}, 1000);
-
-	return <div className={"notice"}></div>;
+	const {onMsg, sendMsg, disconnect} = useWebsocket();
+	onMsg((data: any) => {
+		console.log(data);
+	});
+	// setInterval(() => {
+	// 	sendMsg({msg: "22222222222"});
+	// }, 1000);
+	useEffect(() => {
+		return () => {
+			disconnect();
+		};
+	});
+	return (
+		<div className={"notice"}>
+			<Button onClick={() => disconnect()}>断开</Button>
+			<Button onClick={() => sendMsg({msg: "22222222222"})}>发送信息</Button>
+		</div>
+	);
 }

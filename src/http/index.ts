@@ -31,8 +31,7 @@ class RequestHttp {
 			}
 		);
 		this.service.interceptors.response.use(
-			(response: AxiosResponse) => {
-				debugger;
+			async (response: AxiosResponse) => {
 				if (response.data.code === 200) {
 					return response.data;
 				}
@@ -40,12 +39,12 @@ class RequestHttp {
 				if (response.data.code === 401) {
 					store.dispatch(loginOut());
 					window.location.href = "/#/user/login";
-					message.error(responseData.msg);
+					await message.error(responseData.msg);
 					return Promise.reject(responseData);
 				} else {
 					const errorType = Object.prototype.toString.call(responseData);
 					if (errorType === "[object Object]") {
-						message.error(responseData.msg);
+						await message.error(responseData.msg);
 					}
 					return Promise.reject(responseData);
 				}

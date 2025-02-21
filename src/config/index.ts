@@ -1,2 +1,2 @@
-export const LOGIN_URL = "/notice/index";
-export const HOME_URL = "/notice/index";
+export const LOGIN_URL = "/user/login";
+export const HOME_URL = "/main/index";
