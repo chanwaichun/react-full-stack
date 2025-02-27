@@ -4,7 +4,6 @@ import Main from "@/page/Main";
 import {Navigate} from "react-router-dom";
 import SystemUser from "@/page/System/User";
 import SystemSubject from "@/page/System/Subject";
-
 import Authorized from "@/component/Authorized";
 import UserInfo from "@/page/User/Info";
 

@@ -32,7 +32,6 @@ class RequestHttp {
 		);
 		this.service.interceptors.response.use(
 			(response: AxiosResponse) => {
-				debugger;
 				if (response.data.code === 200) {
 					return response.data;
 				}
