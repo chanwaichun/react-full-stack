@@ -2,10 +2,10 @@ import React, {useMemo} from "react";
 import "./App.css";
 import {Route, Routes} from "react-router-dom";
 import Login from "@/page/User/Login";
+import AiWriting from "@/page/Ai/Writing";
 import Layout from "@/component/Layout";
 import Authorized from "@/component/Authorized";
 import {businessRouter} from "@/route";
-import NoticeIndex from "@/page/Notice";
 
 function RenderRoute(routeList: any): any {
 	return routeList.map((item: any) => {
@@ -33,11 +33,11 @@ function App(): JSX.Element {
 				>
 					{RenderRoute(businessRouter)}
 				</Route>
+				<Route path={"/ai"}>
+					<Route path={"writing"} element={<AiWriting />} />
+				</Route>
 				<Route path={"/user"}>
 					<Route path={"login"} element={<Login />} />
-				</Route>
-				<Route path={"/notice"}>
-					<Route path={"index"} element={<NoticeIndex />} />
 				</Route>
 			</Routes>
 		),

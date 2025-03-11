@@ -5,8 +5,10 @@ import SideMenu from "./module/SideMenu";
 import React, {useEffect, useMemo} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {Dispatch} from "@reduxjs/toolkit";
+// import { setInfo } from "@/reducer/user";
 import {useNavigate} from "react-router";
 import {ConfigProvider} from "antd";
+import primaryTheme from "@/config/primaryTheme";
 
 export default function Layout(props: any) {
 	// const navigate =  useNavigate()

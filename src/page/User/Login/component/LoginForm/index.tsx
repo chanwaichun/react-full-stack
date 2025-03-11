@@ -3,10 +3,9 @@ import React, {useState} from "react";
 import {login} from "@/api/user";
 import {useNavigate} from "react-router";
 import "./index.scss";
-import {setToken, getInfo} from "@/reducer/user";
+import {setToken} from "@/reducer/user";
 import {useDispatch} from "react-redux";
 import {Dispatch} from "@reduxjs/toolkit";
-import {HOME_URL} from "@/config";
 
 export default function LoginForm(props: any) {
 	const navigate = useNavigate();
@@ -16,12 +15,12 @@ export default function LoginForm(props: any) {
 		console.log("Success:", values);
 		try {
 			const res = await login(values);
-			dispatch(setToken(res.data));
+			await dispatch(setToken(res.data));
 			// @ts-ignore
 
-			dispatch(getInfo());
+			// dispatch(setInfo());
 			//
-			navigate(HOME_URL);
+			navigate("/main");
 		} catch (e) {
 			console.log(e);
 		}

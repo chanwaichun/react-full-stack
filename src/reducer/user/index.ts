@@ -14,7 +14,7 @@ const userSlice = createSlice({
 	name: "user", // 用来自动生成 action 中的 type
 	initialState: {
 		// state的初始值
-		token: "2222",
+		token: null,
 		info: null
 	},
 	// 指定state的各种操作，直接在对象中添加方法
