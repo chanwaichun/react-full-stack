@@ -6,6 +6,7 @@ import AiWriting from "@/page/Ai/Writing";
 import Layout from "@/component/Layout";
 import Authorized from "@/component/Authorized";
 import {businessRouter} from "@/route";
+import Home from "@/page/Home";
 
 function RenderRoute(routeList: any): any {
 	return routeList.map((item: any) => {
@@ -20,10 +21,20 @@ function RenderRoute(routeList: any): any {
 }
 
 function App(): JSX.Element {
+	// @ts-ignore
 	return useMemo(
 		() => (
 			<Routes>
+				<Route path={"/"} element={<Home />}></Route>
 				{/*登录拦截*/}
+
+				<Route path={"/ai"}>
+					<Route path={"writing"} element={<AiWriting />} />
+				</Route>
+				<Route path={"/user"}>
+					<Route path={"login"} element={<Login />} />
+				</Route>
+
 				<Route
 					element={
 						<Authorized>
@@ -32,12 +43,6 @@ function App(): JSX.Element {
 					}
 				>
 					{RenderRoute(businessRouter)}
-				</Route>
-				<Route path={"/ai"}>
-					<Route path={"writing"} element={<AiWriting />} />
-				</Route>
-				<Route path={"/user"}>
-					<Route path={"login"} element={<Login />} />
 				</Route>
 			</Routes>
 		),

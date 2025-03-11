@@ -10,6 +10,7 @@ export default function Authorized(props: any) {
 	const location = useLocation();
 	const user: any = useSelector((state: any) => state.user);
 	const dispatch: Dispatch<any> = useDispatch<Dispatch>();
+
 	useEffect(() => {
 		debugger;
 		if (whiteList.includes(location.pathname)) {
@@ -18,12 +19,12 @@ export default function Authorized(props: any) {
 		}
 		//没有token 返回登录页
 		if (!user.token) {
-			navigate("/user/login");
+			navigate("/user/login", {replace: true});
 			return;
 		}
 		console.log(location);
 		dispatch(getInfo());
 		navigate(location.pathname);
-	}, [user.token]);
-	return useMemo(() => <>{props.children}</>, [props.children]);
+	}, [user.token, location]);
+	return useMemo(() => <> {user.token && props.children}</>, [props.children]);
 }
