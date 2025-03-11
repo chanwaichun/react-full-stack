@@ -8,6 +8,7 @@
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.3",
     "@reduxjs/toolkit": "^2.0.1",
     "@svgr/webpack": "^5.5.0",
+    "@tailwindcss/postcss": "^4.0.12",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -80,7 +81,7 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
-    "eslint":"npx eslint --fix src/",
+    "eslint": "npx eslint --fix src/",
     "format": "prettier --write \"src/**/*.+(js|ts|jsx|tsx)\""
   },
   "eslintConfig": {
@@ -159,6 +160,10 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-    "prettier": "^3.1.1"
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.3",
+    "postcss-pxtorem": "^6.1.0",
+    "prettier": "^3.1.1",
+    "tailwindcss": "^4.0.12"
   }
 }

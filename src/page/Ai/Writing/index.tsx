@@ -12,22 +12,8 @@ export default function AiWriting() {
 			setLoading(true);
 			setError(null);
 
-			await chatMessage((chunk: string) => {
-				if (chunk.includes("data:")) {
-					const messages = chunk
-						.split("data:")
-						.filter(item => item)
-						.map(item => {
-							try {
-								const jsonData = JSON.parse(item);
-								return jsonData.choices[0]?.delta?.content;
-							} catch (err) {
-								return "";
-							}
-						})
-						.join("");
-					setData(prev => prev + messages);
-				}
+			await chatMessage((data: string) => {
+				setData(prev => prev + data);
 			});
 		} catch (err) {
 			console.log(err);
