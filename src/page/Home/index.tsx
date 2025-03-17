@@ -199,9 +199,7 @@ export default function Home() {
                     </div>
                 </div>
             </div>
-            <div class="border-t border-gray-100 mt-12 pt-8 text-center text-gray-600">
-                <p>&copy; 2024 光影记录. 保留所有权利</p>
-            </div>
+           
         </div>
     </footer>
     </div>
@@ -209,6 +207,10 @@ export default function Home() {
 	return (
 		<div className={"home"}>
 			<HtmlContent htmlString={string}></HtmlContent>;
+			<div className="border-t border-gray-100 mt-12 p-8 text-center text-gray-600">
+				<p><a href="https://beian.miit.gov.cn/" target="_blank" rel="noreferrer">粤ICP备2025385764号</a></p>
+			</div>
+
 		</div>
 	);
 }
