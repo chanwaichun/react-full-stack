@@ -9,9 +9,9 @@ import PrintPreview from "@/page/Ai/Zite/PrintPreview";
 import VisitorAuth from "@/component/VisitorAuth";
 import Layout from "@/component/Layout";
 import Authorized from "@/component/Authorized";
+import NotFound from "@/page/NotFound";
 import {businessRouter} from "@/route";
 import Home from "@/page/Home";
-
 
 function RenderRoute(routeList: any): any {
 	return routeList.map((item: any) => {
@@ -35,19 +35,19 @@ function App(): JSX.Element {
 				<Route
 					element={
 						<VisitorAuth>
-                            <Outlet />
+							<Outlet />
 						</VisitorAuth>
 					}
 				>
-                    <Route path={"/ai"}>
-                        <Route path={"writing"} element={<AiWriting />} />
-                        <Route path={"zite"}>
-                            <Route index element={<Navigate to="gradeSelection" replace />} />
-                            <Route path={"gradeSelection"} element={<GradeSelection />} />
-                            <Route path={"poemRecommendations"} element={<PoemRecommendations />} />
-                            <Route path={"printPreview"} element={<PrintPreview />} />
-                        </Route>
-                    </Route>
+					<Route path={"/ai"}>
+						<Route path={"writing"} element={<AiWriting />} />
+						<Route path={"zite"}>
+							<Route index element={<Navigate to="gradeSelection" replace />} />
+							<Route path={"gradeSelection"} element={<GradeSelection />} />
+							<Route path={"poemRecommendations"} element={<PoemRecommendations />} />
+							<Route path={"printPreview"} element={<PrintPreview />} />
+						</Route>
+					</Route>
 				</Route>
 
 				<Route path={"/user"}>
@@ -63,6 +63,7 @@ function App(): JSX.Element {
 				>
 					{RenderRoute(businessRouter)}
 				</Route>
+				<Route element={<NotFound />}></Route>
 			</Routes>
 		),
 		[]

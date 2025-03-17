@@ -1,12 +1,23 @@
-import React from "react";
+import React, {useEffect} from "react";
 import "../styles/components.scss";
+import {useLocation, useNavigate} from "react-router";
 
 const PoemRecommendations: React.FC = () => {
+	const location = useLocation();
+	const navigate = useNavigate();
+	useEffect(() => {
+		console.log(location.state);
+	});
 	return (
 		<div className="page-container">
 			<div className="recommendations-header">
 				<div className="header-left">
-					<button className="back-button">
+					<button
+						className="back-button"
+						onClick={() => {
+							navigate(-1);
+						}}
+					>
 						<svg xmlns="http://www.w3.org/2000/svg" className="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 							<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
 						</svg>
@@ -17,7 +28,12 @@ const PoemRecommendations: React.FC = () => {
 			</div>
 
 			<div className="recommendations-list">
-				<div className="featured-recommendation">
+				<div
+					className="featured-recommendation"
+					onClick={() => {
+						navigate("/ai/zite/printPreview", {});
+					}}
+				>
 					<div className="recommendation-header">
 						<span className="ai-tag">AI推荐</span>
 						<div className="difficulty-indicator">

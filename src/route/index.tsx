@@ -79,19 +79,5 @@ export const businessRouter = [
 				}
 			}
 		]
-	},
-	{
-		path: "*",
-		name: "all",
-		element: () => <Authorized />,
-		meta: {
-			icon: "HomeFilled",
-			title: "",
-			isLink: "",
-			isHide: true,
-			isFull: false,
-			isAffix: false,
-			isKeepAlive: true
-		}
 	}
 ];

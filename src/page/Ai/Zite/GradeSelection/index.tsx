@@ -1,7 +1,13 @@
 import React from "react";
 import "../styles/components.scss";
+import {useNavigate} from "react-router";
 
 const GradeSelection: React.FC = () => {
+	const navigate = useNavigate();
+
+	function handleButtonClick(event: any) {
+		navigate("/ai/zite/poemRecommendations", {state: {a: 1}});
+	}
 	return (
 		<div className="page-container">
 			<div className="text-center mb-8">
@@ -18,7 +24,7 @@ const GradeSelection: React.FC = () => {
 							{grade: "3-4", label: "年级"},
 							{grade: "5-6", label: "年级"}
 						].map(item => (
-							<button key={item.grade} className="grade-button">
+							<button key={item.grade} className="grade-button" onClick={handleButtonClick}>
 								<span className="grade-number">{item.grade}</span>
 								<span className="grade-label">{item.label}</span>
 							</button>
