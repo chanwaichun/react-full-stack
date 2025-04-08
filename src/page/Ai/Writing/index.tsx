@@ -1,6 +1,6 @@
 import style from "./index.module.scss";
 import {useEffect, useState} from "react";
-import {chatMessage} from "@/api/thridParty";
+import {chatMessage,getZitieByLevel} from "@/api/thridParty";
 
 export default function AiWriting() {
 	const [loading, setLoading] = useState(false);
@@ -12,7 +12,7 @@ export default function AiWriting() {
 			setLoading(true);
 			setError(null);
 
-			await chatMessage((data: string) => {
+			await getZitieByLevel((data: string) => {
 				setData(prev => prev + data);
 			});
 		} catch (err) {

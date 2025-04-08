@@ -22,9 +22,6 @@ export default function Authorized(props: any) {
 			navigate("/user/login", {replace: true});
 			return;
 		}
-		console.log(location);
-		dispatch(getInfo());
-		navigate(location.pathname);
 	}, [user.token, location]);
 	return useMemo(() => <> {user.token && props.children}</>, [props.children]);
 }

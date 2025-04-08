@@ -6,13 +6,13 @@ import AiWriting from "@/page/Ai/Writing";
 import GradeSelection from "@/page/Ai/Zite/GradeSelection";
 import PoemRecommendations from "@/page/Ai/Zite/PoemRecommendations";
 import PrintPreview from "@/page/Ai/Zite/PrintPreview";
+import Dialog from "@/page/Ai/Zite/Dialog";
 import VisitorAuth from "@/component/VisitorAuth";
 import Layout from "@/component/Layout";
 import Authorized from "@/component/Authorized";
 import NotFound from "@/page/NotFound";
 import {businessRouter} from "@/route";
 import Home from "@/page/Home";
-
 function RenderRoute(routeList: any): any {
 	return routeList.map((item: any) => {
 		// 如果有子路由
@@ -46,6 +46,7 @@ function App(): JSX.Element {
 							<Route path={"gradeSelection"} element={<GradeSelection />} />
 							<Route path={"poemRecommendations"} element={<PoemRecommendations />} />
 							<Route path={"printPreview"} element={<PrintPreview />} />
+							<Route path={"dialog"} element={<Dialog />} />
 						</Route>
 					</Route>
 				</Route>
@@ -63,7 +64,7 @@ function App(): JSX.Element {
 				>
 					{RenderRoute(businessRouter)}
 				</Route>
-				<Route element={<NotFound />}></Route>
+				<Route path={"*"} element={<NotFound />}></Route>
 			</Routes>
 		),
 		[]

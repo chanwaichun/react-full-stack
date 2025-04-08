@@ -3,7 +3,7 @@ import {Button, Form, Input, Upload} from "antd";
 import {rules} from "@/page/User/Login/component/RegisterForm/formConfig";
 import React, {useState} from "react";
 import {useSelector} from "react-redux";
-import {upload} from "@/api/user/index";
+import {upload} from "@/api/user";
 // import { PlusOutlined } from "@ant-design/icons";
 
 export default function Info() {

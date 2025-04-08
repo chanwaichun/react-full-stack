@@ -5,6 +5,12 @@ export const getInfo = createAsyncThunk("user/getInfo", async (state, _) => {
 	const res = await getUserInfo({});
 	return res.data;
 });
+export const getInfoAsyncThunk = (builder: any) => {
+	builder.addCase(getInfo.fulfilled, (state: StateType, action: any) => {
+		debugger;
+		state.info = action.payload;
+	});
+};
 type StateType = {
 	token: string | null;
 	info: null | Object;
@@ -29,12 +35,7 @@ const userSlice = createSlice({
 		}
 	},
 	extraReducers: builder => {
-		builder
-			.addCase(getInfo.pending, (state, action) => {})
-			.addCase(getInfo.fulfilled, (state, action) => {
-				state.info = action.payload;
-			})
-			.addCase(getInfo.rejected, (state, action) => {});
+		getInfoAsyncThunk(builder);
 	}
 });
 // 切片对象会自动的帮助我们生成action
