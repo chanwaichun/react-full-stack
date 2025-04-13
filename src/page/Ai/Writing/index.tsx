@@ -1,6 +1,6 @@
 import style from "./index.module.scss";
 import {useEffect, useState} from "react";
-import {chatMessage,getZitieByLevel} from "@/api/thridParty";
+import {getZitieByLevel} from "@/api/thridParty";
 
 export default function AiWriting() {
 	const [loading, setLoading] = useState(false);

@@ -12,7 +12,6 @@ export default function Authorized(props: any) {
 	const dispatch: Dispatch<any> = useDispatch<Dispatch>();
 
 	useEffect(() => {
-		debugger;
 		if (whiteList.includes(location.pathname)) {
 			navigate(location.pathname);
 			return;

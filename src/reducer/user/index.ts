@@ -7,7 +7,6 @@ export const getInfo = createAsyncThunk("user/getInfo", async (state, _) => {
 });
 export const getInfoAsyncThunk = (builder: any) => {
 	builder.addCase(getInfo.fulfilled, (state: StateType, action: any) => {
-		debugger;
 		state.info = action.payload;
 	});
 };

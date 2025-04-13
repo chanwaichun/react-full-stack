@@ -21,13 +21,13 @@ export function formatDataFromSSE(chunk: string) {
 		.join("");
 }
 
-export async function chatMessage(callback: Function) {
+export async function chatMessage(params: any, callback: Function) {
 	const response = await fetch(prefix + "/chatMessage", {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json"
 		},
-		body: JSON.stringify({})
+		body: JSON.stringify(params)
 	});
 	if (response.body) {
 		// 处理流式数据
@@ -42,6 +42,7 @@ export async function chatMessage(callback: Function) {
 		}
 	}
 }
+
 export async function getZitieByLevel(callback: Function) {
 	const response = await fetch(prefix2 + "/getZitieByLevel", {
 		method: "POST",
